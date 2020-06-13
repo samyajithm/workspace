@@ -1,0 +1,20 @@
+{
+  "appName": "To Do",
+  "sidebar": {
+    "tasks": "Tasks",
+    "important": "Important",
+    "scheduled": "Scheduled",
+    "completed": "Completed"
+  },
+  "task" : {
+    "addTaskPlaceholder": "Add a Task",
+    "taskNamePlaceholder": "Task Name",
+    "taskDescPlaceholder": "Description",
+    "noRecord": "No {{context}} task",
+    "emptyName": "Task Name cannot be empty",
+    "createdOn": "Created On",
+    "completedOn": "Completed On",
+    "dueBy": "Due By",
+    "overDue": "* Over Due"
+  }
+}

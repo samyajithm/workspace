@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@include mat-core();
+$candy-app-primary: mat-palette($mat-red);
+$candy-app-accent:  mat-palette($mat-orange, A200, A100, A400);
+$candy-app-warn:    mat-palette($mat-red);
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+@include angular-material-theme($candy-app-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.select {
+  cursor: pointer;
+}
+
+.pull-right {
+  float: right;
+}
+
+$positions: ("left", "top", "right", "bottom");
+
+@each $selection in $positions {
+  @for $i from 1 through 20 {
+    .padding-#{$selection}-#{$i}{
+      padding-#{$selection}: #{$i}px;
+    }
+  }
+}
+
+@each $selection in $positions {
+  @for $i from 1 through 20 {
+    .margin-#{$selection}-#{$i} {
+      margin-#{$selection}: #{$i}px;
+    }
+  }
+}
+
+.mat-checkbox-frame {
+  border-color: violet !important;
+}

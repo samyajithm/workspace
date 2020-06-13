@@ -1,0 +1,52 @@
+<mat-card class="list">
+  <mat-card-title>
+    <span> {{title}} </span>
+  </mat-card-title>
+
+  <mat-card-content>
+    <mat-form-field class="new-task" *ngIf="state != 'completed'">
+      <input matInput placeholder="{{'task.addTaskPlaceholder' | translate }}"
+             autofocus=""
+             [formControl]="newTaskInput"
+             (keyup.enter)="addNewTask()">
+    </mat-form-field>
+
+    <div cdkDropList class="item-list" (cdkDropListDropped)="drop($event)">
+
+      <div *ngFor="let item of tasks[state]"
+           [ngClass]="{'item-box': !item.hideItem}"
+           [cdkDragDisabled]="item.completed"
+           cdkDrag>
+
+        <ng-container *ngIf="!item.hideItem">
+          <div class="custom-placeholder" *cdkDragPlaceholder></div>
+
+          <mat-checkbox [checked]="item.completed" (change)="$event ? moveTask(item, $event.checked) : null"
+                        color="primary" class="padding-right-20"></mat-checkbox>
+
+          <span class="task-title select ellipsis-truncate"
+                [ngClass]="{'strike': item.completed, 'text-warn': (!item.completed && checkOverDue(item.dueBy))}"
+                (click)="editTask(item)">{{item.name}} </span>
+
+          <mat-icon class="select pull-right padding-left-15" (click)="markAsImportant(item, state, false)"
+                    *ngIf="item.important" color="primary">star
+          </mat-icon>
+
+          <mat-icon class="select pull-right padding-left-15" (click)="markAsImportant(item, state, true)"
+                    *ngIf="!item.important" color="primary">star_border
+          </mat-icon>
+
+          <mat-icon class="select pull-right padding-left-15" (click)="deleteTask(item, state)"
+                    color="warn">delete
+          </mat-icon>
+
+          <mat-icon class="drag-handle pull-right padding-left-15" cdkDragHandle>drag_indicator</mat-icon>
+        </ng-container>
+      </div>
+
+      <div class="item-box item-box-noRecord" *ngIf="checkTotalRecord(tasks[state])">
+        {{'task.noRecord' | translate:{'context': context} }}
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
